@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdee03ecaaa94a844af0ba4cc5610ffa, type: 3}
+  m_Name: FishPrefabsDatabase
+  m_EditorClassIdentifier: Assembly-CSharp::FishPrefabs
+  arrayPrefabs:
+  - label: 0
+    prefab: {fileID: 2264769529013291632, guid: 3df46e76f15ad6d4792fb2a338f2a03e, type: 3}
+    previewSprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  - label: 1
+    prefab: {fileID: 5701390499921104184, guid: c694adfd131141d4882fe1d38d05788c, type: 3}
+    previewSprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  - label: 2
+    prefab: {fileID: 7430168765524129477, guid: c0708fa64f6b6fc4ebc35da477f09853, type: 3}
+    previewSprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  fishAmount: 

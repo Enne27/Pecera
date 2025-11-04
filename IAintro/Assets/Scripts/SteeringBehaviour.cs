@@ -64,7 +64,6 @@ public class SteeringBehaviour : MonoBehaviour
 
     #endregion
 
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (currentState != FishStates.WANDER)
@@ -82,7 +81,7 @@ public class SteeringBehaviour : MonoBehaviour
         // Reiniciar el temporizador para evitar cambio inmediato
         wanderTimer = 0f;
 
-        // (Opcional) Pequeño desplazamiento para evitar quedarse pegado
+        // Pequeño desplazamiento para evitar quedarse pegado
         //transform.position += reflectDir * 0.1f;
     }
 
@@ -115,9 +114,9 @@ public class SteeringBehaviour : MonoBehaviour
         }
 
         // Aplicar velocidad
-        transform.position += velocity * Time.fixedDeltaTime;
-        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
-        //rb.MovePosition(rb.position + (Vector2)velocity * Time.deltaTime);
+       /* transform.position += velocity * Time.fixedDeltaTime
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0);*/
+        rb.MovePosition(rb.position + (Vector2)velocity * Time.fixedDeltaTime);
 
         // Orientarlo, en lugar de hacer rotaciones que quedan extrañas cuando hay un giro grande en el wander.
         if (velocity.sqrMagnitude > 0.01f)
@@ -126,20 +125,6 @@ public class SteeringBehaviour : MonoBehaviour
             Quaternion targetRotation = Quaternion.Euler(0, 0, targetAngle);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 200f * Time.fixedDeltaTime);
         }
-
-        /*  BORRAR
-         *  if (velocity.sqrMagnitude > 0.01f)
-          {
-              float targetAngle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg - 90f;
-              float smoothRotationSpeed = 200f; // grados por segundo
-
-              Quaternion targetRotation = Quaternion.Euler(0, 0, targetAngle);
-              transform.rotation = Quaternion.RotateTowards(
-                  transform.rotation,
-                  targetRotation,
-                  smoothRotationSpeed * Time.deltaTime
-              );
-          }*/
     }
 
 
@@ -356,44 +341,3 @@ public class SteeringBehaviour : MonoBehaviour
 
     #endregion
 }
-
-
-/*
- * APUNTES
- * Normalize -> dirección
- * Magnitud -> longitud
- * Debug.DrawLine(transform.position, transform.position+ vectorDistance, Color.Blue); ->  para pintar líneas
- * 
- * TEORÍA STEERING BEHAVIOUR
- * Steer -> virar
-     position = position + velocity
-    
-     velocity = normalize(target - position) * max_velocity
-
-     desired_velocity = normalize(target - position) * max_velocity
-     steering = desired_velocity - velocity
-
-     steering = truncate (steering, max_force)
-     steering = steering / mass
-     velocity = truncate (velocity + steering , max_speed)
-     position = position + velocity
-  
- * FLEE: 
- * flee_desired_velocity = -seek_desired_velocity
- * ARRIVAL:
- * Para que un movimiento sea más natural, debe comenzar a detenerse al llegar a cierta distancia del objetivo.
- * Código versión anterior de flee:
-        desired_velocity = (transform.position - target.position).normalized * maxVelocity; // character position - target position
-        steeringForce = desired_velocity - velocity;
-
-        steeringForce = Vector3.ClampMagnitude(steeringForce, maxForce); // esto es el truncate
-        steeringForce = steeringForce / mass;
-        velocity = Vector3.ClampMagnitude(velocity + steeringForce, maxVelocity);
-        transform.position += desired_velocity * Time.deltaTime;
-
-        if (velocity != Vector3.zero)
-            transform.forward = velocity.normalized;
-    }
-}
-
-*/

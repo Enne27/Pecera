@@ -25,6 +25,7 @@ public class SteeringBehaviourEditor : Editor
     SerializedProperty baseMaxVelocity;
     SerializedProperty fleeMultiplier;
 
+    SerializedProperty rigidBody;
 
     bool allowEdit;
 
@@ -51,6 +52,8 @@ public class SteeringBehaviourEditor : Editor
 
         maxSeeAhead = serializedObject.FindProperty("maxSeeAhead");
         maxAvoidForce = serializedObject.FindProperty("maxAvoidForce");
+
+        rigidBody = serializedObject.FindProperty("rb");
     }
     public override void OnInspectorGUI()
     {
@@ -64,6 +67,8 @@ public class SteeringBehaviourEditor : Editor
         EditorGUILayout.Space();
 
         EditorGUILayout.PropertyField(currentState);
+        EditorGUILayout.PropertyField(rigidBody);
+
 
         EditorGUILayout.Space();
         //EditorGUILayout.LabelField("General Settings", EditorStyles.boldLabel);
